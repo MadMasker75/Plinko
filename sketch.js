@@ -10,59 +10,73 @@ var div = [];
 
 var divh = 300 ;
 
+var score =0;
 function setup() {
-  createCanvas(480,800);
-
+  createCanvas(800, 800);
   engine = Engine.create();
   world = engine.world;
+  ground = new Ground(width/2,height,width,20);
 
-  ground = new Ground(440,height,1200,20); 
 
-  if(frameCount%80===0){
-    par.push(new Particle(random(width/2-10, width/2+10),10,10));
-}
+   for (var k = 0; k <=width; k = k + 80) {
+     div.push(new Div(k, height-divh/2, 10, divh));
+   }
 
-for (var i = 40; i <=width; i = i + 50) {
-  pli.push(new Plinko(i,75,10));
-}
-for (var i = 15; i <=width-10; i = i + 50) {
-  pli.push(new Plinko(i,175,10));
-}
 
-for (var i = 40; i <=width-10; i = i + 50) {
-  pli.push(new Plinko(i,275,10));
-}
-for (var i = 15; i <=width-10; i = i + 50) {
-  pli.push(new Plinko(i,375,10));
-}
+    for (var j = 75; j <=width; j=j+50) 
+    {
+    
+       pli.push(new Plinko(j,75));
+    }
 
-for (var i = 40; i <=width-10; i = i + 50) {
-  pli.push(new Plinko(i,475,10));
-}
+    for (var j = 50; j <=width-10; j=j+50) 
+    {
+    
+       pli.push(new Plinko(j,175));
+    }
 
-for (var k = 0; k <=width; k = k + 80) {
-    div.push(new Div(k, height-divh/2, 10, divh));
+     for (var j = 75; j <=width; j=j+50) 
+    {
+    
+       pli.push(new Plinko(j,275));
+    }
+
+     for (var j = 50; j <=width-10; j=j+50) 
+    {
+    
+       pli.push(new Plinko(j,375));
+    }
+
+    
+
+    
 }
-}
+ 
+
 
 function draw() {
-   
-  background(0,0,0); 
+  background("black");
+  textSize(20)
+ //text("Score : "+score,20,30);
   Engine.update(engine);
   ground.display();
-
-  for (var j = 0; j < par.length; j++){
-    par[j].display();
-}
-
-for (var i = 0; i < pli.length; i++){
-  pli[i].display();
-}
-
-  for (var k = 0; k < div.length; k++){
-    div[k].display();
-}
-  drawSprites();
   
-  
+   for (var i = 0; i < pli.length; i++) {
+     
+     pli[i].display();
+     
+   }
+   if(frameCount%60===0){
+     par.push(new Particle(random(width/2-30, width/2+30), 10,10));
+     score++;
+   }
+ 
+  for (var j = 0; j < par.length; j++) {
+   
+     par[j].display();
+   }
+   for (var k = 0; k < div.length; k++) {
+     
+     div[k].display();
+   }
 }
