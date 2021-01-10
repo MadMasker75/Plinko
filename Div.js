@@ -14,8 +14,7 @@ class Div {
         rectMode(CENTER);
         fill("white");
         rect(pos.x,pos.y,this.w,this.h);
-        
-        
+           
         
     }
 };
